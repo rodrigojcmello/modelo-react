@@ -1,0 +1,50 @@
+{
+  "name": "modelo-react",
+  "version": "0.0.1",
+  "description": "Um modelo funcional para se iniciar projetos em React",
+  "main": "index.jxs",
+  "scripts": {
+    "start": "export NODE_ENV=development && webpack-dev-server",
+    "web-prod": "export NODE_ENV=production && webpack-dev-server",
+    "android": "export NODE_ENV=production && export PLATAFORMA=cordova && webpack && cd cordova && cordova run android",
+    "browser": "export NODE_ENV=production && export PLATAFORMA=cordova && webpack && cd cordova && cordova run browser",
+    "android-dev": "export NODE_ENV=development && export PLATAFORMA=cordova && webpack && cd cordova && cordova run android",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigojcmello/modelo-react.git"
+  },
+  "keywords": [
+    "react",
+    "modelo",
+    "starter-kit",
+    "boilerplate",
+    "webpack"
+  ],
+  "author": "Rodrigo José Carvalho de Mello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigojcmello/modelo-react/issues"
+  },
+  "homepage": "https://github.com/rodrigojcmello/modelo-react#readme",
+  "dependencies": {
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "cssnano": "^3.10.0",
+    "html-webpack-plugin": "^2.29.0",
+    "postcss-calc": "^6.0.0",
+    "postcss-loader": "^2.0.6",
+    "precss": "^2.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.2",
+    "react-transition-group": "^2.2.0",
+    "sugarss": "^1.0.0",
+    "webpack": "^3.3.0",
+    "webpack-dev-server": "^2.5.1"
+  }
+}
