@@ -15,44 +15,43 @@ class App extends Component {
     }
     render() {
         return (
-            <Router>
-                <TransitionGroup>
-                    <CSSTransition
-                        classNames='fading'
-                        key={ this.props.location.pathname.split('/')[1] }
-                        mountOnEnter={ true }
-                        timeout={ 400 }
-                        unmountOnExit={ true }
-                    >
-                        <div className="WRAPPER">
-                            <Switch location={ this.props.location } >
-                                <Route
-                                    component={ Pagina1 }
-                                    exact
-                                    path='/pagina-1'
-                                />
-                                <Route
-                                    component={ Pagina2 }
-                                    path='/pagina-2'
-                                />
-                                <Route
-                                    component={ Pagina3 }
-                                    path='/pagina-3'
-                                />
-                            </Switch>
-                        </div>
-                    </CSSTransition>
-                </TransitionGroup>
-            </Router>
+            <TransitionGroup>
+                <CSSTransition
+                    classNames='fading-teste'
+                    key={ this.props.location.pathname.split('/')[1] }
+                    mountOnEnter={ true }
+                    timeout={ 400 }
+                    unmountOnExit={ true }
+                >
+                    <div className="WRAPPER">
+                        <Switch location={ this.props.location } >
+                            <Route
+                                component={ Pagina1 }
+                                exact
+                                path='/pagina-1'
+                            />
+                            <Route
+                                component={ Pagina2 }
+                                path='/pagina-2'
+                            />
+                            <Route
+                                component={ Pagina3 }
+                                location={ this.props.location }
+                                path='/pagina-3'
+                            />
+                        </Switch>
+                    </div>
+                </CSSTransition>
+            </TransitionGroup>
         );
     }
 };
 
-App = withRouter(App);
+const AppWithRouter = withRouter(App);
 
 const Rota = (props) => (
     <Router>
-        <App />
+        <AppWithRouter />
     </Router>
 );
 

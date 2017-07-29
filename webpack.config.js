@@ -3,9 +3,7 @@ const html = require('html-webpack-plugin');
 
 const config = {
     entry: './index.jsx',
-    output: {
-        filename: 'pacote.min.js'
-    },
+    output: { filename: 'pacote.min.js' },
     resolve: { extensions: ['.js', '.jsx'] },
     module: {
         loaders: [
@@ -33,7 +31,7 @@ const config = {
                         loader: 'postcss-loader',
                         options: {
                             parser: 'sugarss',
-                            plugins: (loader) => [
+                            plugins: loader => [
                                 require('precss')(),
                                 require('autoprefixer')(),
                                 require('postcss-calc')(),
@@ -55,7 +53,6 @@ if (process.env.PLATAFORMA == 'cordova') {
 }
 
 if (process.env.NODE_ENV == 'production') {
-    config.devtool = 'source-map';
     config.plugins.push(
         new webpack.DefinePlugin({
             'process.env': {
@@ -72,11 +69,6 @@ if (process.env.NODE_ENV == 'production') {
             }
         })
     );
-    // config.plugins.push(
-    //     new webpack.LoaderOptionsPlugin({
-    //         debug: true
-    //     })
-    // );
 }
 
 module.exports = config;
