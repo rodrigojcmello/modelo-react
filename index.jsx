@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Pagina1 from './componente/pagina1.jsx';
@@ -9,67 +9,51 @@ import Pagina3 from './componente/pagina3.jsx';
 
 import './postcss/teste.sss';
 
-const MyTransition = (props) => (
-    <Transition {...props}>
-        {transitionState => React.cloneElement(props.children, {
-            style: getStyleForTransitionState(transitionState)
-        })}
-    </Transition>
-);
-
-
-
-const MyList = () => (
-    <TransitionGroup>
-        { items.map(item => (  <MyTransition>{ item }</MyTransition> )) }
-    </TransitionGroup>
-);
-
-const Fade = (props) => (
-    <CSSTransition
-        in={ true }
-        exit={ true }
-        timeout={ 5000 }
-        classNames='fade'
-        >
-            { props.children }
-    </CSSTransition>
-);
-
-class Pagina1Fade extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
-        // this.state= { show: false };
-        // setInterval(() => {
-        //     this.setState({ show: !this.state.show });
-        // }, 1000);
     }
     render() {
         return (
-            <Fade in={ true }>
-                <Pagina1 />
-            </Fade>
+            <Router>
+                <TransitionGroup>
+                    <CSSTransition
+                        classNames='fading'
+                        key={ this.props.location.pathname.split('/')[1] }
+                        mountOnEnter={ true }
+                        timeout={ 400 }
+                        unmountOnExit={ true }
+                    >
+                        <div className="WRAPPER">
+                            <Switch location={ this.props.location } >
+                                <Route
+                                    component={ Pagina1 }
+                                    exact
+                                    path='/pagina-1'
+                                />
+                                <Route
+                                    component={ Pagina2 }
+                                    path='/pagina-2'
+                                />
+                                <Route
+                                    component={ Pagina3 }
+                                    path='/pagina-3'
+                                />
+                            </Switch>
+                        </div>
+                    </CSSTransition>
+                </TransitionGroup>
+            </Router>
         );
     }
-}
-
-const TransitionedPage = (WrappedComponent) => {
-    const TransitionedComponent = (props) => (
-        <Fade { ...props }>
-            { React.cloneElement(<WrappedComponent />) }
-        </Fade>
-    );
-    return TransitionedComponent;
 };
 
-const App = () => (
+App = withRouter(App);
+
+const Rota = (props) => (
     <Router>
-        <TransitionGroup>
-            <Route path='/pagina-1' component={ TransitionedPage(Pagina1) } />
-            <Route path='/pagina-2' component={ TransitionedPage(Pagina2) } />
-            <Route path='/pagina-3' component={ TransitionedPage(Pagina3) } />
-        </TransitionGroup>
+        <App />
     </Router>
 );
 
-render(<App />, document.getElementById('app'));
+render(<Rota />, document.getElementById('app'));
