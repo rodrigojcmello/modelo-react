@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
+import { Switch, Route, Link, withRouter } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Pagina6 from './pagina6.jsx';
-import Pagina7 from './pagina7.jsx';
+import Pagina6 from './nivel-3/pagina6.jsx';
+import Pagina7 from './nivel-3/pagina7.jsx';
 
 class Rota extends Component {
     constructor(props) {
         super(props);
     }
     render() {
-        console.log('### this.props.location PAGINA5');
-        console.log(this.props.location);
-        console.log('props');
-        console.log(this.props);
         return (
             <TransitionGroup>
                 <CSSTransition
@@ -22,7 +18,7 @@ class Rota extends Component {
                     timeout={ 400 }
                     unmountOnExit={ true }
                 >
-                    <div className="WRAPPER2">
+                    <div className="WRAPPER-pagina-5">
                         <Switch location={ this.props.location } >
                             <Route
                                 component={ Pagina6 }

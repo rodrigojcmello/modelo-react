@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { HashRouter as Router, Switch, Route, Link, withRouter } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, withRouter } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import Pagina1 from './componente/pagina1.jsx';
-import Pagina2 from './componente/pagina2.jsx';
-import Pagina3 from './componente/pagina3.jsx';
-
-import './postcss/teste.sss';
+import Pagina1 from './componente/nivel-1/pagina1.jsx';
+import Pagina2 from './componente/nivel-1/pagina2.jsx';
+import Pagina3 from './componente/nivel-1/pagina3.jsx';
 
 class App extends Component {
     constructor(props) {
@@ -17,13 +15,13 @@ class App extends Component {
         return (
             <TransitionGroup>
                 <CSSTransition
-                    classNames='fading-teste'
+                    classNames='fade'
                     key={ this.props.location.pathname.split('/')[1] }
                     mountOnEnter={ true }
                     timeout={ 400 }
                     unmountOnExit={ true }
                 >
-                    <div className="WRAPPER">
+                    <div className='WRAPPER'>
                         <Switch location={ this.props.location } >
                             <Route
                                 component={ Pagina1 }
