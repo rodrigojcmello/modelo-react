@@ -10,9 +10,15 @@ const App = props => (
             type='text'
             name='nome'
             label='Nome'
-            validation={ true }
-            notification='Preencha seu nome'
+            validation='Preencha seu nome'
         />
+        <Field
+            type='text'
+            name='cidade'
+            label='Cidade'
+            validation='Em que cidade você mora?'
+        />
+        <button>Enviar</button>
     </Form>
 );
 

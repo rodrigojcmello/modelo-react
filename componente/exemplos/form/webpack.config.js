@@ -1,4 +1,3 @@
-// const webpack = require('webpack');
 const html = require('html-webpack-plugin');
 
 const config = {

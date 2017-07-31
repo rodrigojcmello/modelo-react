@@ -3,17 +3,35 @@ import React, { Component } from 'react';
 class Field extends Component {
     constructor(props) {
         super(props);
-        this.state.status = 'pending';
+        this.state = {
+            status: 'ok'
+        };
+    }
+    updateStatus(status) {
+        this.setState({ 'status': status });
+    }
+    teste() {
+        console.log('### OK');
     }
     render() {
-        let { validation, label, notification, ...props } = this.props;
+        let { validation, label, ...props } = this.props;
+        let message = '';
+        if (this.state.status == 'pending') {
+            message = (
+                <div className='message' >
+                    { validation }
+                </div>
+            );
+        }
         return (
-            <div className={ validation ? 'with-validation' : '' } >
+            <div
+                className={ validation ? 'field required' : 'field' }
+                data-updateStatus={ this.updateStatus.bind(this) }
+                onInput={ this.teste.bind(this) }
+            >
                 <label>{ label }</label>
                 <input { ...props } />
-                <div className='notification' >
-                    { notification }
-                </div>
+                { message }
             </div>
         );
     }
