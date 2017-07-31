@@ -1,56 +1,135 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { HashRouter as Router, Switch, Route, withRouter } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import Pagina1 from './componente/nivel-1/pagina1.jsx';
-import Pagina2 from './componente/nivel-1/pagina2.jsx';
-import Pagina3 from './componente/nivel-1/pagina3.jsx';
+const Home = () => (
+    <div>
+        <h2>Home</h2>
+    </div>
+);
 
-class App extends Component {
+const About = () => (
+    <div>
+        <h2>About</h2>
+    </div>
+);
+
+const Topics = ({ match }) => (
+    <div>
+        <h2>Topics</h2>
+        <ul>
+            <li>
+                <Link to={`${ match.url }/rendering`}>
+                    Rendering with React
+                </Link>
+            </li>
+            <li>
+                <Link to={`${ match.url }/components`}>
+                    Components
+                </Link>
+            </li>
+            <li>
+                <Link to={`${ match.url }/props-v-state`}>
+                    Props v. State
+                </Link>
+            </li>
+        </ul>
+
+        <Route component={ TransitionRouteLevel2 }/>
+    </div>
+);
+
+const Topic = ({ match }) => (
+    <div>
+        <h3>{ match.params.topicId }</h3>
+    </div>
+);
+
+const Auth = () => (
+    <div>
+        Você está autenticado!
+    </div>
+);
+
+const TransitionRouteLevel2 = ({ location, match, props }) => (
+    <TransitionGroup>
+        <CSSTransition
+            classNames='fade'
+            key={ location.pathname.split('/')[1] + '/' + location.pathname.split('/')[2] }
+            mountOnEnter={ true }
+            timeout={ 400 }
+            unmountOnExit={ true }
+        >
+            <div className='WRAPPER'>
+                <Switch location={ location } >
+                    <Route path={`${ match.url }/:topicId`} component={ Topic }/>
+                    <Route exact path={ match.url } render={ () => (
+                        <h3>Please select a topic.</h3>
+                    ) }/>
+                </Switch>
+            </div>
+        </CSSTransition>
+    </TransitionGroup>
+);
+
+const TransitionRoute = ({ location, props }) => (
+    <TransitionGroup>
+        <CSSTransition
+            classNames='fade'
+            key={ location.pathname.split('/')[1] }
+            mountOnEnter={ true }
+            timeout={ 400 }
+            unmountOnExit={ true }
+        >
+            <div className='WRAPPER'>
+                <Switch location={ location } >
+                    <Route exact path='/' component={ Home } />
+                    <Route path='/home' component={ Home } />
+                    <Route path='/about' component={ About } />
+                    <AuthRoute path='/topics' component={ Topics } />
+                    <AuthRoute path='/auth' component={ Auth } />
+                </Switch>
+            </div>
+        </CSSTransition>
+    </TransitionGroup>
+);
+
+const AuthRoute = props => (
+    <div>
+        { !true ? <Route { ...props } /> : <Redirect to='/' /> }
+    </div>
+);
+
+class BasicExample extends Component {
     constructor(props) {
         super(props);
     }
     render() {
         return (
-            <TransitionGroup>
-                <CSSTransition
-                    classNames='fade'
-                    key={ this.props.location.pathname.split('/')[1] }
-                    mountOnEnter={ true }
-                    timeout={ 400 }
-                    unmountOnExit={ true }
-                >
-                    <div className='WRAPPER'>
-                        <Switch location={ this.props.location } >
-                            <Route
-                                component={ Pagina1 }
-                                exact
-                                path='/pagina-1'
-                            />
-                            <Route
-                                component={ Pagina2 }
-                                path='/pagina-2'
-                            />
-                            <Route
-                                component={ Pagina3 }
-                                location={ this.props.location }
-                                path='/pagina-3'
-                            />
-                        </Switch>
-                    </div>
-                </CSSTransition>
-            </TransitionGroup>
+            <Router>
+                <div>
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/about">About</Link>
+                        </li>
+                        <li>
+                            <Link to="/topics">Topics</Link>
+                        </li>
+                        <li>
+                            <Link to="/auth">Auth</Link>
+                        </li>
+                    </ul>
+
+                    <hr/>
+                    <Route component={ TransitionRoute } />
+                </div>
+            </Router>
         );
     }
-};
+}
 
-const AppWithRouter = withRouter(App);
-
-const Rota = (props) => (
-    <Router>
-        <AppWithRouter />
-    </Router>
-);
-
-render(<Rota />, document.getElementById('app'));
+render(<BasicExample/>, document.getElementById('app'));
