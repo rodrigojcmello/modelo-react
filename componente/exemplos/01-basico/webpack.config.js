@@ -5,24 +5,25 @@ const config = {
     entry: './src/index.jsx',
     output: {
         filename: 'pacote.js',
-        path: __dirname + '/src'
+        path: __dirname + '/dist'
     },
-    resolve: { extensions: ['.js', '.jsx'] },
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
-                include: [ __dirname + '/src' ],
+                include: __dirname + '/src',
                 options: {
                     presets: ['es2015', 'react'],
                     plugins: ['transform-object-rest-spread']
                 }
             }
-        ] },
-        plugins: [
-            new html({ template: './src/index.html' })
         ]
-    };
+    },
+    plugins: [new html({ template: './src/index.html' })]
+};
 
-    module.exports = config;
+module.exports = config;

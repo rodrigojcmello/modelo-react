@@ -1,8 +1,8 @@
 {
-  "name": "hello-world",
+  "name": "01-basico",
   "version": "1.0.0",
   "description": "",
-  "main": "index.jsx",
+  "main": "./src/index.jsx",
   "scripts": {
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "html-webpack-plugin": "^2.29.0",
+    "html-webpack-plugin": "^2.30.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "webpack": "^3.4.1"
