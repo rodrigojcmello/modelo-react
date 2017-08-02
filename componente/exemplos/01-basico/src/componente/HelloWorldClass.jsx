@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class HelloWorldClass extends Component {
     constructor(props) {
         super(props);
+        // console.log(teste);
     }
     render() {
         return (
