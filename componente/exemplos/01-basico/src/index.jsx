@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import HelloWorldFunctional from './componente/HelloWorldFunctional.jsx';
-import HelloWorldClass from './componente/HelloWorldClass.jsx';
+import HelloWorldFunctional from './component/HelloWorldFunctional.jsx';
+import HelloWorldClass from './component/HelloWorldClass.jsx';
 
 const App = props => (
     <div>

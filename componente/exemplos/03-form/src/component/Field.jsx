@@ -4,17 +4,19 @@ class Field extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            status: 'ok'
+            status: 'ok',
+            field: []
         };
+        this.field = [];
     }
     updateStatus(status) {
         this.setState({ 'status': status });
     }
-    teste() {
-        console.log('### OK');
+    validateField() {
+
     }
     render() {
-        let { validation, label, ...props } = this.props;
+        let { validation, name, label, ...props } = this.props;
         let message = '';
         if (this.state.status == 'pending') {
             message = (
@@ -26,11 +28,12 @@ class Field extends Component {
         return (
             <div
                 className={ validation ? 'field required' : 'field' }
-                data-updateStatus={ this.updateStatus.bind(this) }
-                onInput={ this.teste.bind(this) }
             >
                 <label>{ label }</label>
-                <input { ...props } />
+                <input
+                    { ...props }
+                    ref={ element => this.field[name] = element }
+                />
                 { message }
             </div>
         );

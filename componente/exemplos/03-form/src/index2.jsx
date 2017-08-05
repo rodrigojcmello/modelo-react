@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import Form from './componente/Form.jsx';
-import Field from './componente/Field.jsx';
+import Form from './component/Form.jsx';
+import Field from './component/Field.jsx';
 
 const App = props => (
     <Form>
