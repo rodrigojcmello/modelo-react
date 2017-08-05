@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './style.sss';
 
 class ListaArrastarSoltar extends Component {
     constructor(props) {
@@ -20,25 +21,22 @@ class ListaArrastarSoltar extends Component {
         console.log(event.type);
     }
     onTouchMove(event) {
-        // TODO: Compensar a posição exata do touch
-        console.log('### onTouchMove');
-        console.log(event.touches[0] );
-        console.log(event.touches[0].pageY);
-        console.log('### getBoundingClientRect');
-        console.log(event.target.getBoundingClientRect().top);
         let pageY = event.touches[0].pageY;
         let elementTop = event.target.getBoundingClientRect().top;
-        let elementHeight = event.target.clientHeight;
-
+        let elementHeight = event.target.offsetHeight;
+        console.log('### elementHeight');
+        console.log(elementHeight);
 
         let lista = Array.prototype.slice.call(this.lista.getElementsByClassName('item'));
-        console.log('### lista');
-        console.log(lista);
         lista.forEach((item, i) => {
             let top = item.getBoundingClientRect().top;
-            if (top < elementTop && top + 40 > elementTop) {
-                item.style.background = 'red';
-                item.style.marginTop = '40px';
+            if (top < elementTop && top + elementHeight - 25 > elementTop) {
+                item.classList.add('acima');
+                lista.forEach((item_2, i_2) => {
+                    if (item === item_2) {
+                        item_2.classList.remove('acima');
+                    }
+                });
             }
         });
 
@@ -47,19 +45,16 @@ class ListaArrastarSoltar extends Component {
     }
     render() {
         return (
-            <div ref={ el => this.lista = el }>
+            <div
+                ref={ el => this.lista = el }
+                className='lista-arrastar-soltar'
+            >
                 { this.state.lista.map((item, i) => {
                     return (
                         <div
                             key={ i }
                             className='item'
-                            // onTouchStart={ this.onTouchStart.bind(this) }
                             onTouchMove={ this.onTouchMove.bind(this) }
-                            style={{
-                                height: '40px',
-                                border: '1px solid black',
-                                width: '300px'
-                            }}
                         >
                             { item.texto }
                         </div>

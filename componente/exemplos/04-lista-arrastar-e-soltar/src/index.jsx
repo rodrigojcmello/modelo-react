@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import ListaItemTopo from './componente/ListaItemTopo.jsx';
-import ListaArrastarSoltar from './componente/ListaArrastarSoltar.jsx';
+import ListaItemTopo from './componente/ListaItemTopo';
+import ListaArrastarSoltar from './componente/ListaArrastarSoltar';
 
 const App = props => (
     <div>

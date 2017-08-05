@@ -17,13 +17,31 @@ const config = {
                 loader: 'babel-loader',
                 include: __dirname + '/src',
                 options: {
-                    presets: ['es2015', 'react'],
+                    presets: [
+                        'es2015', 'react'
+                    ],
                     plugins: ['transform-object-rest-spread']
                 }
+            }, {
+                test: /\.sss$/,
+                loader: [
+                    'style-loader', {
+                        loader: 'postcss-loader',
+                        options: {
+                            parser: 'sugarss',
+                            plugins: loader => [
+                                require('precss')(),
+                                require('autoprefixer')(),
+                                require('postcss-calc')(),
+                                require('cssnano')()
+                            ]
+                        }
+                    }
+                ]
             }
         ]
     },
-    plugins: [new html({ template: './src/index.html' })]
+    plugins: [new html({template: './src/index.html'})]
 };
 
 module.exports = config;
