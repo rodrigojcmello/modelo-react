@@ -39,8 +39,6 @@ class ListaArrastarSoltar extends Component {
                 });
             }
         });
-        // event.target.style.position = 'absolute';
-        // event.target.style.top = parseInt((pageY - (elementHeight / 2))) + 'px';
         this.state.lista[index].style = {
             position: 'absolute',
             top: parseInt((pageY - (elementHeight / 2))) + 'px'
