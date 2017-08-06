@@ -40,6 +40,7 @@ class ListaArrastarSoltar extends Component {
             }
         });
         this.state.lista[index].style = {
+            opacity: 0.4,
             position: 'absolute',
             top: parseInt((pageY - (elementHeight / 2))) + 'px'
         };

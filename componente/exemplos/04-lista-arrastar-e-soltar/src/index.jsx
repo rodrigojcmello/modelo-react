@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 
 import ListaItemTopo from './componente/ListaItemTopo';
 import ListaArrastarSoltar from './componente/ListaArrastarSoltar';
+import Cordova from './controller/Cordova';
+Cordova.initialize();
 
 const App = props => (
     <div>

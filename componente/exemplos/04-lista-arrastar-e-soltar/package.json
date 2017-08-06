@@ -5,6 +5,7 @@
   "main": "./src/index.jsx",
   "scripts": {
     "start": "webpack-dev-server",
+    "android": "webpack && cd ./cordova && cordova run android",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -5,7 +5,7 @@ const config = {
     entry: './src/index.jsx',
     output: {
         filename: 'pacote.js',
-        path: __dirname + '/dist'
+        path: __dirname + '/cordova/www'
     },
     resolve: {
         extensions: ['.js', '.jsx']
