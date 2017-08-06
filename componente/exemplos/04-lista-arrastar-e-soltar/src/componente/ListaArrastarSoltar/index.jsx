@@ -25,18 +25,16 @@ class ListaArrastarSoltar extends Component {
     }
     onTouchMove(index, event) {
         let pageY = event.touches[0].pageY;
-        let elementTop = event.target.getBoundingClientRect().top;
-        let elementHeight = event.target.offsetHeight;
+        let elementTop =this.state.lista[index].getBoundingClientRect().top;
+        let elementHeight = this.state.lista[index].offsetHeight;
 
         this.item.forEach((item, i) => {
             let top = item.getBoundingClientRect().top;
             if (top < elementTop && top + elementHeight - 25 > elementTop) {
                 this.state.lista = update(this.state.lista, { [i]: { className: { $set: 'item acima' } } });
-                this.item.forEach((item_2, i_2) => {
-                    if (!item.isEqualNode(item_2)) {
-                        this.state.lista = update(this.state.lista, { [i_2]: { className: { $set: 'item' } } });
-                    }
-                });
+                if (!item.isEqualNode(this.state.lista[index])) {
+                    this.state.lista = update(this.state.lista, { [i]: { className: { $set: 'item' } } });
+                }
             }
         });
         this.state.lista[index].style = {
@@ -48,13 +46,6 @@ class ListaArrastarSoltar extends Component {
         this.setState({
             lista: this.state.lista
         });
-    }
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextState != this.state) {
-            return true;
-        } else {
-            return false;
-        }
     }
     onTouchEnd(index, event) {
         let ordem = 0;
