@@ -13,7 +13,21 @@ class ListaArrastarSoltar extends Component {
                 { texto: 'Texto 03', className: 'item', style: {} },
                 { texto: 'Texto 04', className: 'item', style: {} },
                 { texto: 'Texto 05', className: 'item', style: {} },
-                { texto: 'Texto 06', className: 'item', style: {} }
+                { texto: 'Texto 06', className: 'item', style: {} },
+                { texto: 'Texto 07', className: 'item', style: {} },
+                { texto: 'Texto 08', className: 'item', style: {} },
+                { texto: 'Texto 09', className: 'item', style: {} },
+                // { texto: 'Texto 10', className: 'item', style: {} },
+                // { texto: 'Texto 11', className: 'item', style: {} },
+                // { texto: 'Texto 12', className: 'item', style: {} },
+                // { texto: 'Texto 13', className: 'item', style: {} },
+                // { texto: 'Texto 14', className: 'item', style: {} },
+                // { texto: 'Texto 15', className: 'item', style: {} },
+                // { texto: 'Texto 16', className: 'item', style: {} },
+                // { texto: 'Texto 17', className: 'item', style: {} },
+                // { texto: 'Texto 18', className: 'item', style: {} },
+                // { texto: 'Texto 19', className: 'item', style: {} },
+                // { texto: 'Texto 20', className: 'item', style: {} }
             ],
             teste: 'background'
         };
@@ -22,27 +36,32 @@ class ListaArrastarSoltar extends Component {
         console.log('### touchStart');
         console.log('### event.type');
         console.log(event.type);
+        event.preventDefault();
     }
     onTouchMove(index, event) {
+        event.preventDefault();
         let pageY = event.touches[0].pageY;
-        let elementTop =this.state.lista[index].getBoundingClientRect().top;
-        let elementHeight = this.state.lista[index].offsetHeight;
+        let targetTop =this.item[index].getBoundingClientRect().top;
+        let targetHeight = this.item[index].offsetHeight;
 
         this.item.forEach((item, i) => {
-            let top = item.getBoundingClientRect().top;
-            if (top < elementTop && top + elementHeight - 25 > elementTop) {
-                this.state.lista = update(this.state.lista, { [i]: { className: { $set: 'item acima' } } });
-                if (!item.isEqualNode(this.state.lista[index])) {
-                    this.state.lista = update(this.state.lista, { [i]: { className: { $set: 'item' } } });
+            if (!item.isEqualNode(this.item[index])) {
+                let itemTop = item.getBoundingClientRect().top;
+                if (
+                    targetTop < itemTop + targetHeight / 2 &&
+                    targetTop > itemTop - targetHeight - 16 - targetHeight / 2 - 2
+                ) {
+                    this.state.lista = update( this.state.lista, { [i]: { className: { $set: 'item acima' } } });
+                } else {
+                    this.state.lista = update( this.state.lista, { [i]: { className: { $set: 'item' } } });
                 }
             }
         });
         this.state.lista[index].style = {
             opacity: 0.4,
             position: 'absolute',
-            top: parseInt((pageY - (elementHeight / 2))) + 'px'
+            top: (pageY - (targetHeight / 2)) + 'px'
         };
-
         this.setState({
             lista: this.state.lista
         });
@@ -64,12 +83,34 @@ class ListaArrastarSoltar extends Component {
             lista: this.state.lista
         });
     }
+    endTeste() {
+        console.log('### FINAL');
+    }
+    startTeste(event) {
+        console.log('### startTeste');
+        console.log(event);
+        setTimeout(() => {
+            this.item.forEach((item, i) => {
+                this.state.lista = update(this.state.lista, { [i]: {
+                    className: { $set: 'item' },
+                    style: { $set: { color: 'red' } }
+                } });
+            });
+            this.setState({
+                lista: this.state.lista
+            });
+        }, 300);
+    }
     render() {
         return (
             <div
                 ref={ el => this.lista = el }
                 className='lista-arrastar-soltar'
             >
+                <button
+                    onTouchStart={ this.startTeste.bind(this) }
+                    onTouchEnd={ this.endTeste.bind(this) }
+                >Pressionar!</button>
                 <h1>{ this.state.teste }</h1>
                 { this.state.lista.map((item, i) => {
                     return (
