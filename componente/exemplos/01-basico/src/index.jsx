@@ -11,7 +11,7 @@ if (process.env.NODE_ENV == 'production') {
 const App = props => (
     <div>
         <HelloWorldFunctional nome='World' />
-        <HelloWorldClass nome='World' />
+        <HelloWorldClass nome='World' teste="teste 123" />
     </div>
 );
 

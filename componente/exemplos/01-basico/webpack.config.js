@@ -15,8 +15,7 @@ const config = {
             test: /\.jsx?$/,
             loader: 'babel-loader',
             options: {
-                presets: ['es2015', 'react'],
-                plugins: ['transform-object-rest-spread']
+                presets: ['stage-3', 'es2015', 'react']
             },
             include: __dirname + '/src'
         }
