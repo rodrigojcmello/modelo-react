@@ -21,6 +21,6 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "uglifyjs-webpack-plugin": "^0.4.6",
-    "webpack": "^3.5.1"
+    "webpack": "^3.5.2"
   }
 }
